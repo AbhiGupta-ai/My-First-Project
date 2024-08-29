@@ -1,13 +1,19 @@
 {
   "orgName": "Demo company",
   "edition": "Developer",
-  "features": ["EnableSetPasswordInApi"],
+  "features": [],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
     },
     "mobileSettings": {
       "enableS1EncryptedStoragePref2": false
+    },
+    "enhancedNotesSettings":{
+      "enableEnhancedNotes": true
+    },
+    "apexSettings":{
+      "enableDisableParallelApexTesting":false
     }
   }
 }
