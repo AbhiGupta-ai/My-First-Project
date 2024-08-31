@@ -4,7 +4,7 @@
   3) if you want to delete the existing org: sfdx force:org:delete
   4) if you want to take a pull from your local scratch org: sfdx force:org:pull
 
-# My First ChartJS Project
+# ChartJS Salesforce Project LWC
 
 ![image](https://github.com/user-attachments/assets/984d51d1-812c-4078-a967-e3dc2030a579)
 
