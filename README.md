@@ -1,3 +1,9 @@
+# Push Code
+  1) first need to create a scratch org: sf org create scratch -d -f config/project-scratch-def.json -a dreamhouse-org
+  2) push the code in local org: sfdx force:source:push -f
+  3) if you want to delete the existing org: sfdx force:org:delete
+  4) if you want to take a pull from your local scratch org: sfdx force:org:pull
+
 # Salesforce DX Project: Next Steps
 
 Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
