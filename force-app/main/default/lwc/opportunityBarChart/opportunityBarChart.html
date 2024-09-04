@@ -1,0 +1,15 @@
+<!--
+  @description       : 
+  @author            : Abhishek Gupta
+  @group             : 
+  @last modified on  : 09-01-2024
+  @last modified by  : Abhishek Gupta
+-->
+<template>
+    <lightning-card title="Opportunity Bar Chart" icon-name="utility:chart">
+        <h1>Bar Chart</h1>
+        <template if:true={chartConfiguration}>
+            <c-chart-second chart-config={chartConfiguration}></c-chart-second>
+        </template>
+    </lightning-card>
+</template>
