@@ -1,0 +1,31 @@
+<!--
+  @description       : 
+  @author            : Abhishek Gupta
+  @group             : 
+  @last modified on  : 09-07-2024
+  @last modified by  : Abhishek Gupta
+-->
+<template>
+    <lightning-card title="Hello International">
+        <p>International Locale & Currency Symbol and Currency ISO Code</p>
+        <div class="slds-box slds-m-top_medium">
+            <lightning-button variant="Neutral" label="Show Me" onclick={handleClick}></lightning-button>
+            <template if:true={buttonClicked}>
+                <div class="slds-m-top_medium">
+                    <p>Formatted number Code with CurrencyIsoCode: {formattedCurrency}</p>
+                </div>
+
+                <div class="slds-m-top_medium">
+                    <p>TimeZone: {timeZone}</p>
+                </div>
+
+                <div class="slds-m-top_medium">
+                    <p>Formatted Date: {formattedDate}</p>
+                </div>
+                <div class="slds-m-top_medium">
+                    <lightning-button variant="Neutral" label="Cancel" onclick={handleCancel}></lightning-button>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
