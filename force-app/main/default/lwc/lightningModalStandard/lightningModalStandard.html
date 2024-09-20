@@ -1,0 +1,22 @@
+<!--
+  @description       : 
+  @author            : Abhishek Gupta
+  @group             : 
+  @last modified on  : 09-08-2024
+  @last modified by  : Abhishek Gupta
+-->
+<template>
+    <lightning-card>
+        <p>Lightning Modal Standard</p>
+        <div class="slds-box slds-m-top_medium">
+            <lightning-button variant="base" label="show Me" onclick={handleModal}></lightning-button>
+            <template if:true={showModal}>
+                <lightning-modal-header label="My Modal Heading"></lightning-modal-header>
+                <lightning-modal-body> Content: {content} </lightning-modal-body>
+                <lightning-modal-footer>
+                    <lightning-button label="OK" onclick={handleOkay}></lightning-button>
+                </lightning-modal-footer>
+            </template>
+        </div>
+    </lightning-card>
+</template>
