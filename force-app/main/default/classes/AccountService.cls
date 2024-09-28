@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Abhishek Gupta
  * @group             : 
- * @last modified on  : 09-22-2024
+ * @last modified on  : 09-28-2024
  * @last modified by  : Abhishek Gupta
 **/
 public with sharing class AccountService {
@@ -165,5 +165,10 @@ public with sharing class AccountService {
                 acc.addError('sorry You cant delete this account phone number is already added please contact on phone first then try to delete!!');
             }
         }
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static List<Account> getAccountList() {
+        return [SELECT Id, Name FROM Account];
     }
 }
