@@ -1,0 +1,108 @@
+<!--
+  @description       : 
+  @author            : Abhishek Gupta
+  @group             : 
+  @last modified on  : 09-28-2024
+  @last modified by  : Abhishek Gupta
+-->
+<template>
+    <div class="slds-card slds-m-top_small">
+        <h1 class="slds-page-header__title slds-truncate">Lightning Data Services in Salesforce</h1>
+        <div class="slds-m-top_small">
+            <p>Lightning Data Service (LDS) is a powerful tool provided by Salesforce that allows Lightning Web Components (LWC) to interact with Salesforce data without the need for Apex code. It operates on the client-side and offers several key features that streamline data retrieval and management within LWC.</p>
+        </div>
+    </div>
+
+    <lightning-card title="Accounts List">
+        <template if:true={accounts}>
+            <ul>
+                <template for:each={accounts} for:item="account">
+                    <li key={account.Id}>{account.Name}</li>
+                </template>
+            </ul>
+        </template>
+        <template if:false={accounts}>
+            No accounts found.
+        </template>
+    </lightning-card>
+
+    <lightning-card title="Create Account">
+        <div class="slds-p-horizontal_samll">
+          <lightning-record-form object-api-name="Account"
+                                 layout-type="Full"
+                                 mode="edit"
+                                 columns="3">
+          </lightning-record-form>
+        </div>
+    </lightning-card>
+
+    <lightning-card title="view Account records">
+        <div class="slds-p-horizontal_samll">
+            <lightning-record-form record-id='001HF00000DULikYAH'
+                                   object-api-name="Account"
+                                   layout-type="Full"
+                                   mode="view"
+                                   columns="2">
+            </lightning-record-form>
+        </div>
+    </lightning-card>
+
+    <lightning-card title="Edit Account Details">
+        <div class="slds-p-horizontal_samll">
+          <lightning-record-form record-id='001HF00000DULikYAH'
+                                 object-api-name="Account"
+                                 layout-type="Full"
+                                 mode="edit"
+                                 columns="2">
+          </lightning-record-form>
+        </div>
+      </lightning-card>
+
+      <lightning-card title="Record View Contact Form">
+        <lightning-record-view-form record-id="003HF00000Abs3jYAB" object-api-name="Contact">
+            <div class="slds-box">
+                <lightning-output-field field-name="Name"></lightning-output-field>
+                <lightning-output-field field-name="Email"></lightning-output-field>
+            </div>
+        </lightning-record-view-form>
+    </lightning-card>
+
+
+    <lightning-card title="Record edit Contact Form">
+        <lightning-record-edit-form record-id="003HF00000Abs3jYAB" object-api-name="Contact">
+            <lightning-messages ></lightning-messages>
+            <lightning-output-field field-name="AccountId"></lightning-output-field>
+            <lightning-input-field field-name="FirstName"></lightning-input-field>
+            <lightning-input-field field-name="LastName"></lightning-input-field>
+            <lightning-input-field field-name="Email"></lightning-input-field>
+            <lightning-button class="slds-m-top_small" variant="brand" type="submit" name="update" label="Update"></lightning-button>
+        </lightning-record-edit-form>
+    </lightning-card>
+
+    <lightning-card title="Record View form">
+        <div class="slds-box">
+            <lightning-record-view-form object-api-name="Contact" record-id="003HF00000Abs3jYAB">
+                <lightning-output-field field-name={nameField}> </lightning-output-field>
+                <lightning-output-field field-name={phoneField}> </lightning-output-field>
+            </lightning-record-view-form>
+        </div>
+    </lightning-card>
+
+
+    <div class="slds-box">
+        <lightning-card title="Contact">
+            <lightning-record-edit-form object-api-name="Contact" record-id="003HF00000Abs3jYAB">
+                <lightning-input-field field-name={nameField}> </lightning-input-field>
+                <lightning-input-field field-name={phoneField}> </lightning-input-field>
+                <div class="slds-align_absolute-center">
+                    <lightning-button variant="brand" type="submit" label="Save">
+                    </lightning-button>
+                </div>
+            </lightning-record-edit-form>
+        </lightning-card>
+    </div>
+
+    <!-- we have lightning-record-form instead of tha we can use mode in lightning record form as well view or edit and create -->
+
+
+</template>
