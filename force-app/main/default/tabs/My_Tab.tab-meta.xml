@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>I have created this tab for develop and testing purpose and also learning</description>
+    <label>My Tab</label>
+    <lwcComponent>lifeCycleHooksDemo</lwcComponent>
+    <motif>Custom69: Guitar</motif>
+</CustomTab>
