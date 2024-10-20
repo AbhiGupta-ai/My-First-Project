@@ -1,3 +1,6 @@
+In this repository, I've added all interview-related demo code along with detailed descriptions. So far, I've covered LWC, Apex controllers, Apex triggers, and batch Apex. If you need help starting from scratch, feel free to check out my GitHub repository for guidance.
+
+
 # Push Code
   1) first need to create a scratch org: sf org create scratch -d -f config/project-scratch-def.json -a dreamhouse-org
   2) push the code in local org: sfdx force:source:push -f
