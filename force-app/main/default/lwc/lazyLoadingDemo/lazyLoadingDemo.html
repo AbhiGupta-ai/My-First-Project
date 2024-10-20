@@ -1,0 +1,26 @@
+<!--
+  @description       : 
+  @author            : Abhishek Gupta
+  @group             : 
+  @last modified on  : 10-20-2024
+  @last modified by  : Abhishek Gupta
+-->
+<template>
+    <lightning-card>
+        <div class="slds-box">
+            <h1 class="title">Infinite Scrolling Data Table with Lazy Loading</h1>
+            <div style="height: 300px;">
+                <lightning-datatable 
+                    key-field="id"
+                    data={data}
+                    columns={columns}
+                    enable-infinite-loading
+                    onloadmore={handleMoreData}
+                    hide-checkbox-column="true"
+                    show-row-number-column="true">
+                </lightning-datatable>
+            </div>
+        </div>
+    </lightning-card>
+    
+</template>
