@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Abhishek Gupta
  * @group             : 
- * @last modified on  : 09-22-2024
+ * @last modified on  : 12-26-2024
  * @last modified by  : Abhishek Gupta
 **/
 trigger OpportunityTrigger on Opportunity (after insert, after update, after delete) {
@@ -10,6 +10,12 @@ trigger OpportunityTrigger on Opportunity (after insert, after update, after del
     if (Trigger.isAfter) {
         if (Trigger.isInsert) {
             OpportunityService.onafterInsert(Trigger.new);
+        }
+    }
+
+    if (Trigger.isAfter) {
+        if (Trigger.isDelete) {
+            OpportunityService.createTaskOnOpportunityDelete(Trigger.old);
         }
     }
 }

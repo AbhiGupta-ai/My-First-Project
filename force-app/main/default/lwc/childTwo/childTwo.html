@@ -1,0 +1,13 @@
+<!--
+  @description       : 
+  @author            : Abhishek Gupta
+  @group             : 
+  @last modified on  : 10-21-2024
+  @last modified by  : Abhishek Gupta
+-->
+<template>
+    <div>
+        <h1>Child two component : {messageSendingToChildTwo}</h1>
+        <c-child-three onmessagefromchildthree={handleMessage} message-sending-to-child-three={messageSendingToChildThree}></c-child-three>
+    </div>
+</template>

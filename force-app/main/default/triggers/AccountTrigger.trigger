@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Abhishek Gupta
  * @group             : 
- * @last modified on  : 09-22-2024
+ * @last modified on  : 12-20-2024
  * @last modified by  : Abhishek Gupta
 **/
 trigger AccountTrigger on Account (before insert, before update, after insert, after update, before delete, after delete) {
@@ -39,6 +39,15 @@ trigger AccountTrigger on Account (before insert, before update, after insert, a
         }
         if (Trigger.isDelete) {
             AccountService.addErrorWhenPhoneNumberPresent(Trigger.old);
+        }
+    }
+
+    if (Trigger.isAfter) {
+        if (Trigger.isInsert) {
+            AccountService.insertRecord(Trigger.new);   
+        }
+        if (Trigger.isUpdate) {
+            AccountService.updateContactRecord(Trigger.new, Trigger.oldMap);
         }
     }
 }

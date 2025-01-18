@@ -1,0 +1,13 @@
+<!--
+  @description       : 
+  @author            : Abhishek Gupta
+  @group             : 
+  @last modified on  : 10-21-2024
+  @last modified by  : Abhishek Gupta
+-->
+<template>
+    <div class="slds-card slds-box">
+        <h1>Child one component: {messageFromChildThree}</h1>
+        <c-child-two onmessagefromchildtwo={handleMessages} message-sending-to-child-two={messagesendingtochildtwo}></c-child-two>
+    </div>
+</template>

@@ -1,4 +1,4 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, track } from 'lwc';
 
 export default class LifeCycleHooksDemo extends LightningElement {
 
@@ -6,6 +6,7 @@ export default class LifeCycleHooksDemo extends LightningElement {
     constructor() {
         super(); // Always call super() in constructor at the first time itself. it calls LightningElement class constructor.
         console.log('constructor call when component is created....!');
+        // this.sortUsersByAge();
     }
 
     // 2. connectedCallback: called when the component is inserted into the DOM . It executes from parent to child.
@@ -14,7 +15,8 @@ export default class LifeCycleHooksDemo extends LightningElement {
     }
 
     // 3. renderedCallback: called after every rendered of the component. Use this hook to execute logic after a component has completed rendering on the UI.
-    // it runs from child to parent component. use properties in renederedCallback() as it can cause infinite loop in renderedCallback.
+    // it runs from child to parent component. use p
+    // roperties in renederedCallback() as it can cause infinite loop in renderedCallback.
     renderedCallback() {
         console.log('component rendered....');
     }

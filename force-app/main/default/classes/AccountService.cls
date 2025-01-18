@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Abhishek Gupta
  * @group             : 
- * @last modified on  : 09-28-2024
+ * @last modified on  : 12-20-2024
  * @last modified by  : Abhishek Gupta
 **/
 public with sharing class AccountService {
@@ -171,4 +171,89 @@ public with sharing class AccountService {
     public static List<Account> getAccountList() {
         return [SELECT Id, Name FROM Account];
     }
+
+    public static void insertRecord(List<Account> lstAccount) {
+        List<Contact> contactTobeInserted = new List<Contact>();
+        for (Account accObj : lstAccount) {
+            Integer i = 1;
+            Contact con = new Contact();
+            con.lastName = 'New contact ' + i;
+            i++;
+            con.AccountId = accObj.Id;
+            contactTobeInserted.add(con);
+
+        }
+
+        if (!contactTobeInserted.isEmpty()) {
+            insert contactTobeInserted;
+        }
+    }
+
+    // public static void updateContactRecord(List<Account> lstAccount, Map<Id, Account> oldMap){
+
+    //     Map<Id, Account> mapAccount = new Map<Id, Account>();
+    //     List<Contact> conToBeUpdated = new List<Contact>();
+
+    //     for (Account accObj : lstAccount) {
+            
+    //         if (accObj != null && accObj.phone != oldMap.get(accObj.Id).phone) {
+    //             mapAccount.put(accObj.Id, accObj);
+    //         }
+    //     }
+
+    //     List<Contact> contactLst = [SELECT Id, lastName, AccountId FROM Contact WHERE AccountId IN: mapAccount.keySet()];
+
+    //     for (Contact con : contactLst) {
+    //         if (mapAccount != null && mapAccount.containsKey(con.AccountId)) {
+    //             Contact conObj = new Contact();
+    //             conObj.lastName = 'Updated last name';
+    //             conObj.AccountId = con.AccountId;
+    //             conToBeUpdated.add(conObj);
+    //         }
+    //     }
+
+    //     if (!conToBeUpdated.isEmpty()) {
+    //         update conToBeUpdated;
+    //     }
+    // }
+
+    public static void updateContactRecord(List<Account> lstAccount, Map<Id, Account> oldMap) {
+        // Map to hold Accounts where the phone number has changed
+        Map<Id, Account> mapAccount = new Map<Id, Account>();
+        List<Contact> conToBeUpdated = new List<Contact>();
+    
+        // Identify Accounts with a changed phone number
+        for (Account accObj : lstAccount) {
+            if (accObj != null && accObj.Phone != oldMap.get(accObj.Id).Phone) {
+                mapAccount.put(accObj.Id, accObj);
+            }
+        }
+    
+        // Query related Contacts for these Accounts
+        if (!mapAccount.isEmpty()) {
+            List<Contact> contactLst = [
+                SELECT Id, LastName, AccountId
+                FROM Contact
+                WHERE AccountId IN :mapAccount.keySet()
+            ];
+    
+            // Update Contact's LastName
+            for (Contact con : contactLst) {
+                if (mapAccount.containsKey(con.AccountId)) {
+                    con.LastName = 'Updated Last Name'; // Customize update logic as needed
+                    conToBeUpdated.add(con);
+                }
+            }
+        }
+    
+        // Perform bulk update on Contacts
+        if (!conToBeUpdated.isEmpty()) {
+            try {
+                update conToBeUpdated;
+            } catch (DmlException e) {
+                System.debug('Error updating Contacts: ' + e.getMessage());
+            }
+        }
+    }
+    
 }
