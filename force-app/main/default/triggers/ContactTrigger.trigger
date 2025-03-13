@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Abhishek Gupta
  * @group             : 
- * @last modified on  : 09-24-2024
+ * @last modified on  : 01-19-2025
  * @last modified by  : Abhishek Gupta
 **/
 trigger ContactTrigger on Contact (after delete, after insert, after update) {
@@ -16,6 +16,7 @@ trigger ContactTrigger on Contact (after delete, after insert, after update) {
     if (Trigger.isAfter) {
         if (Trigger.isInsert && Trigger.isUpdate) {
             ContactService.createAccount(Trigger.new);
+            ContactService.updateUserPhoneNUmber(Trigger.new, Trigger.oldMap);
         }
     }
 

@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Abhishek Gupta
  * @group             : 
- * @last modified on  : 12-20-2024
+ * @last modified on  : 01-19-2025
  * @last modified by  : Abhishek Gupta
 **/
 trigger AccountTrigger on Account (before insert, before update, after insert, after update, before delete, after delete) {
@@ -48,6 +48,8 @@ trigger AccountTrigger on Account (before insert, before update, after insert, a
         }
         if (Trigger.isUpdate) {
             AccountService.updateContactRecord(Trigger.new, Trigger.oldMap);
+
+            AccountService.updateContactRecordWhenAccPhoneChnaged(Trigger.New, Trigger.oldMap);
         }
     }
 }

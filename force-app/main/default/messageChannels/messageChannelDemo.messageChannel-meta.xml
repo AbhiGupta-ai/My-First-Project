@@ -9,4 +9,8 @@
         <fieldName>name</fieldName>
         <description>name of the person</description>
     </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>age</fieldName>
+        <description>age of the person</description>
+    </lightningMessageFields>
 </LightningMessageChannel>

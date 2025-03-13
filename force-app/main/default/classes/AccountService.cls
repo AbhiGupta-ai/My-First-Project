@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Abhishek Gupta
  * @group             : 
- * @last modified on  : 12-20-2024
+ * @last modified on  : 01-19-2025
  * @last modified by  : Abhishek Gupta
 **/
 public with sharing class AccountService {
@@ -253,6 +253,71 @@ public with sharing class AccountService {
             } catch (DmlException e) {
                 System.debug('Error updating Contacts: ' + e.getMessage());
             }
+        }
+    }
+
+
+    // Ques:Given a list of account records, write an apex method that groups the Accounts by their industry field and returns the count of Accounts for each industry
+    public static Map<String, Integer> getAccountIndustryCount () {
+
+        Map<String, Integer> mapName = new Map<String, Integer>();
+        List<AggregateResult> groupedAccount = [SELECT Industry, COUNT(Id) recordCount FROM Account WHERE Industry != null GROUP BY Industry];
+
+        for (AggregateResult ar : groupedAccount) {
+            String accIndustry = (String) ar.get('Industry');
+            Integer industryCount = (Integer) ar.get('recordCount');
+
+            mapName.put(accIndustry, industryCount);
+        }
+
+        return mapName;
+    }
+
+    public static Map<String, Integer> getAccountCountByIndustry(List<Account> accounts) {
+        // Map to store the count of accounts grouped by Industry
+        Map<String, Integer> industryCountMap = new Map<String, Integer>();
+        
+        // Loop through the accounts and group by Industry
+        for (Account acc : accounts) {
+            if (acc.Industry != null) { // Skip accounts with no Industry value
+                if (industryCountMap.containsKey(acc.Industry)) {
+                    industryCountMap.put(acc.Industry, industryCountMap.get(acc.Industry) + 1);
+                } else {
+                    industryCountMap.put(acc.Industry, 1);
+                }
+            }
+        }
+        
+        return industryCountMap;
+    }
+    
+
+    public static void updateContactRecordWhenAccPhoneChnaged(List<Account> lstAccount, Map<Id, Account> mapAccount) {
+
+        List<Contact> lstContact = new List<Contact>();
+        Map<Id, Account> mapName = new Map<Id, Account>();
+
+        for (Account acc : lstAccount) {
+            if (acc.phone != null && acc.phone != mapAccount.get(acc.Id).phone) {
+                mapName.put(acc.Id, acc);
+            }
+        }
+
+        if (!mapName.isEmpty()) {
+            List<Contact> lstContacts = [SELECT Id, Name, Description, AccountId FROM Contact Where AccountId IN :mapName.keySet()];
+
+            for (Contact con : lstContacts) {
+                if (mapName.containsKey(con.AccountId)) {
+                    Contact contact = new Contact();
+                    contact.Id = con.Id;
+                    contact.description = 'account phone number changed';
+                    lstContact.add(contact);
+                }
+            }
+        }
+
+        if (!lstContact.isEmpty()) {
+            update lstContact;
         }
     }
     
