@@ -5,7 +5,6 @@ import messageChannelDemo from '@salesforce/messageChannel/messageChannelDemo__c
 export default class SubscriberComponent extends LightningElement {
 
     name;
-    age;
     subscription = null;
 
     @wire (MessageContext) messageContext;
@@ -23,7 +22,6 @@ export default class SubscriberComponent extends LightningElement {
         if (!this.subscription) {
             this.subscription=subscribe(this.messageContext, messageChannelDemo, (parameter) =>{
                 this.name=parameter.name; // in this parameter.name -- name is that field which is defined in meta xml file
-                this.age=parameter.age;
             });
         }
     }
