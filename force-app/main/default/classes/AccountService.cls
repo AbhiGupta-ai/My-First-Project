@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Abhishek Gupta
  * @group             : 
- * @last modified on  : 09-28-2024
+ * @last modified on  : 04-15-2025
  * @last modified by  : Abhishek Gupta
 **/
 public with sharing class AccountService {
@@ -170,5 +170,35 @@ public with sharing class AccountService {
     @AuraEnabled(cacheable=true)
     public static List<Account> getAccountList() {
         return [SELECT Id, Name FROM Account];
+    }
+
+    public static void restrictOpportunityExistsInAccount(List<Account> lstAccount) {
+        
+        Set<Id> accountIds = new Set<Id>();
+        Map<Id, List<Opportunity>> mapOpportunity = new Map<Id, List<Opportunity>>();
+
+        for (Account acc : lstAccount) {
+            accountIds.add(acc.Id);
+        }
+
+        if (!accountIds.isEmpty()) {
+            
+            List<Opportunity> lstOpportunity = [SELECT Id, Name, AccountId FROM Opportunity WHERE AccountId IN :accountIds];
+        
+            for (Opportunity opp : lstOpportunity) {
+                if (!mapOpportunity.containsKey(opp.AccountId)) {
+                    mapOpportunity.put(opp.AccountId, new List<Opportunity>());
+                }
+
+                mapOpportunity.get(opp.AccountId).add(opp);
+            }
+        }
+
+        for (Account acc : lstAccount) {
+            
+            if (mapOpportunity.containsKey(acc.Id)) {
+                acc.addError('You cannot delete this account because it has related Opportunity');
+            }
+        }
     }
 }

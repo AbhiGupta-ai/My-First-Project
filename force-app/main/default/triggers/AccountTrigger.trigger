@@ -2,7 +2,7 @@
  * @description       : 
  * @author            : Abhishek Gupta
  * @group             : 
- * @last modified on  : 09-22-2024
+ * @last modified on  : 04-15-2025
  * @last modified by  : Abhishek Gupta
 **/
 trigger AccountTrigger on Account (before insert, before update, after insert, after update, before delete, after delete) {
@@ -30,15 +30,20 @@ trigger AccountTrigger on Account (before insert, before update, after insert, a
     //     }
     // }
 
-    if (Trigger.isBefore) {
-        if (Trigger.isInsert) {
-            AccountService.createAccountSetDescription(Trigger.new);
-        }
-        if (Trigger.isUpdate) {
-            AccountService.updateDescriptionwhenPhoneAdded(Trigger.new, Trigger.oldMap);
-        }
-        if (Trigger.isDelete) {
-            AccountService.addErrorWhenPhoneNumberPresent(Trigger.old);
-        }
+    // if (Trigger.isBefore) {
+    //     if (Trigger.isInsert) {
+    //         AccountService.createAccountSetDescription(Trigger.new);
+    //     }
+    //     if (Trigger.isUpdate) {
+    //         AccountService.updateDescriptionwhenPhoneAdded(Trigger.new, Trigger.oldMap);
+    //     }
+    //     if (Trigger.isDelete) {
+    //         AccountService.addErrorWhenPhoneNumberPresent(Trigger.old);
+    //     }
+    // }
+
+
+    if (Trigger.isBefore && Trigger.isDelete) {
+        AccountService.restrictOpportunityExistsInAccount(Trigger.old);
     }
 }
