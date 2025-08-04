@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="Test Communication Using AddEvent Listerners">
+
+        <div class="slds-form-element">
+            <label class="slds-form-element__label">Select Label</label>
+            <div class="slds-form-element__control">
+                <div class="slds-select_container">
+                    <c-child-component-communication class="child-comp"></c-child-component-communication>
+                    <h1>Data coming from child:: {dataChild}</h1>
+                    <select class="slds-select">
+                        <option value="">Please select</option>
+                        <option>Option One</option>
+                        <option>Option Two</option>
+                        <option>Option Three</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </lightning-card>
+</template>
